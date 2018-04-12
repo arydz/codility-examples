@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SwapOperation {
 
     //O(n^2)
-    public static boolean slowSolution(int[] a, int[] b, int m) {
+    public static boolean slowSolution(int[] a, int[] b, int max) {
         int n = a.length;
         int sumA = Arrays.stream(a).sum();
         int sumB = Arrays.stream(b).sum();
@@ -26,7 +26,7 @@ public class SwapOperation {
     }
 
     //O(n+m)
-    public static boolean fastSolution(int[] a, int[] b, int m) {
+    public static boolean fastSolution(int[] a, int[] b, int max) {
         int n = a.length;
         int sumA = Arrays.stream(a).sum();
         int sumB = Arrays.stream(b).sum();
@@ -34,17 +34,17 @@ public class SwapOperation {
         if (difference % 2 == 1) {
             return false;
         }
-        int[] count = counting(a, m);
+        int[] count = counting(a, max);
         for (int i = 0; i < n; i++) {
-            if (0 <= b[i] - difference && b[i] - difference <= m && count[b[i] - difference] > 0) {
+            if (0 <= b[i] - difference && b[i] - difference <= max && count[b[i] - difference] > 0) {
                 return true;
             }
         }
         return false;
     }
 
-    private static int[] counting(int[] a, int m) {
-        int[] p = new int[m + 1];
+    private static int[] counting(int[] a, int max) {
+        int[] p = new int[max + 1];
         for (int i = 0; i < a.length; i++) {
             p[a[i]] += 1;
         }
